@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,25 +84,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Plus.png" />
+    <EmbeddedResource Include="Resources\Plus.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Light_off.png" />
+    <EmbeddedResource Include="Resources\Light_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Light_on.png" />
+    <EmbeddedResource Include="Resources\Light_on.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Follow.png" />
+    <EmbeddedResource Include="Resources\Follow.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Wrench.png" />
+    <EmbeddedResource Include="Resources\Wrench.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Help.png" />
+    <EmbeddedResource Include="Resources\Help.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Download.png" />
+    <EmbeddedResource Include="Resources\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ding.wav" />
+    <EmbeddedResource Include="Resources\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
