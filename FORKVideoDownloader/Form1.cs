@@ -47,10 +47,73 @@ namespace FORKVideoDownloader
             if(dr !=  DialogResult.Yes) { return; }
             string outputFolder = Environment.CurrentDirectory;
             string outputPath = Path.Combine(outputFolder, "%(title)s.%(ext)s");
+
+            // Read values from ComboBox and TextBox
+            string qualitySelection = qualityComboBox.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(qualitySelection)) // Default if nothing selected or item is weird
+            {
+                // Attempt to read Text property if SelectedItem is null (e.g. user typed value not in list)
+                qualitySelection = qualityComboBox.Text;
+                if (string.IsNullOrWhiteSpace(qualitySelection)) // Final fallback
+                {
+                    qualitySelection = "Best Video + Best Audio";
+                }
+            }
+
+            string formatArgumentString = "";
+            switch (qualitySelection)
+            {
+                case "Best Video + Best Audio":
+                    formatArgumentString = "-f \"bestvideo+bestaudio/best\"";
+                    break;
+                case "Best Video":
+                    formatArgumentString = "-f \"bestvideo\"";
+                    break;
+                case "Best Audio":
+                    formatArgumentString = "-f \"bestaudio\" -x --audio-format mp3";
+                    break;
+                case "1080p":
+                    formatArgumentString = "-f \"bestvideo[height<=1080]+bestaudio/best[height<=1080]\"";
+                    break;
+                case "720p":
+                    formatArgumentString = "-f \"bestvideo[height<=720]+bestaudio/best[height<=720]\"";
+                    break;
+                default:
+                    // If the text in comboBox is something not recognized, try to use it directly as a format string.
+                    // This allows users to type custom formats if they wish.
+                    // However, to prevent errors, we should validate it or have a safer default.
+                    // For now, let's default to best if it's not one of the predefined ones.
+                    // A more advanced approach might be to check if qualitySelection contains spaces or special chars
+                    // and if not, assume it's a direct format string like "140" or "22".
+                    // But the prompt implies a default for unrecognized selections.
+                    formatArgumentString = "-f \"bestvideo+bestaudio/best\"";
+                    break;
+            }
+
+            string otherOptionsString = otherOptionsTextBox.Text.Trim();
+
+            // Construct the final arguments string
+            List<string> argParts = new List<string>();
+            argParts.Add($"\"{link}\""); // URL
+
+            if (!string.IsNullOrEmpty(formatArgumentString))
+            {
+                argParts.Add(formatArgumentString);
+            }
+            if (!string.IsNullOrEmpty(otherOptionsString))
+            {
+                argParts.Add(otherOptionsString);
+            }
+
+            argParts.Add($"-o \"{outputPath}\""); // Output template
+            argParts.Add("--no-playlist");       // Other fixed options
+
+            string finalArguments = string.Join(" ", argParts);
+
             ProcessStartInfo processStartInfo = new ProcessStartInfo
             {
                 FileName = "youtube-dlp.exe",
-                Arguments = $"\"{link}\" -o \"{outputPath}\" --no-playlist",
+                Arguments = finalArguments,
                 UseShellExecute = false,
             };
             Process process = new Process { StartInfo = processStartInfo };

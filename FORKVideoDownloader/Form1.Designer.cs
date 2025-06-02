@@ -208,6 +208,33 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.pictureBox1);
+            //
+            // qualityComboBox
+            //
+            this.qualityComboBox = new System.Windows.Forms.ComboBox();
+            this.qualityComboBox.FormattingEnabled = true;
+            this.qualityComboBox.Items.AddRange(new object[] {
+            "Best Video + Best Audio",
+            "Best Video",
+            "Best Audio",
+            "1080p",
+            "720p"});
+            this.qualityComboBox.Location = new System.Drawing.Point(10, 25); // Adjusted Y for groupbox title
+            this.qualityComboBox.Name = "qualityComboBox";
+            this.qualityComboBox.Size = new System.Drawing.Size(200, 28); // Standard size
+            this.qualityComboBox.TabIndex = 1; // Next after pictureBox1
+            //
+            // otherOptionsTextBox
+            //
+            this.otherOptionsTextBox = new System.Windows.Forms.TextBox();
+            this.otherOptionsTextBox.Location = new System.Drawing.Point(10, 60);
+            this.otherOptionsTextBox.Name = "otherOptionsTextBox";
+            this.otherOptionsTextBox.Size = new System.Drawing.Size(200, 26); // Standard TextBox height
+            this.otherOptionsTextBox.TabIndex = 2;
+            this.otherOptionsTextBox.PlaceholderText = "Other yt-dlp options";
+
+            this.groupBox3.Controls.Add(this.qualityComboBox);
+            this.groupBox3.Controls.Add(this.otherOptionsTextBox);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 125);
             this.groupBox3.Name = "groupBox3";
@@ -218,11 +245,12 @@
             // pictureBox1
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill; // Changed
             this.pictureBox1.Image = global::FORKVideoDownloader.Properties.Resources.Download;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 22);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 95); // Adjusted Y to be below new controls
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(525, 717);
+            //this.pictureBox1.Size = new System.Drawing.Size(525, 717); // Changed
+            this.pictureBox1.Size = new System.Drawing.Size(505, 620); // Adjusted size
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -647,6 +675,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ComboBox qualityComboBox;
+        private System.Windows.Forms.TextBox otherOptionsTextBox;
     }
 }
 
