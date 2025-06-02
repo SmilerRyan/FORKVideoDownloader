@@ -231,7 +231,6 @@
             this.otherOptionsTextBox.Name = "otherOptionsTextBox";
             this.otherOptionsTextBox.Size = new System.Drawing.Size(200, 26); // Standard TextBox height
             this.otherOptionsTextBox.TabIndex = 2;
-            this.otherOptionsTextBox.PlaceholderText = "Other yt-dlp options";
 
             this.groupBox3.Controls.Add(this.qualityComboBox);
             this.groupBox3.Controls.Add(this.otherOptionsTextBox);
